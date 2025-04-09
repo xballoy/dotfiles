@@ -1,0 +1,8 @@
+[alias]
+# Utilisation : git fixup {sha1}
+fixup = !sh -c 'SHA=$(git rev-parse $1) && git commit --fixup $SHA && git rebase -i --autosquash $SHA~' -
+lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+clean-remote = remote prune origin
+clean-local-branch = "!f() { echo 'First, pruning remote branches'; git remote prune origin; echo 'Then, removing branches with deleted remote or upstream'; git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs -r git branch -D; echo 'All done!'; }; f"
+squash = "!f() { git reset --soft $(git merge-base main $(git rev-parse --abbrev-ref HEAD)); git commit; }; f"
+default-branch = "!f() { (git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@') 2>/dev/null; }; f"

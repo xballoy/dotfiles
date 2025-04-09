@@ -1,0 +1,28 @@
+[user]
+	name = Xavier Balloy
+	useconfigonly = true
+	email = 686305+xballoy@users.noreply.github.com
+	signingkey = AEB97017
+[core]
+	autocrlf = input
+	excludesFile = ~/.config/git/.gitignore_global
+	editor = code --wait
+[credential]
+	helper = osxkeychain
+	useHttpPath = true
+[help]
+	autocorrect = 1
+[commit]
+	template = .gitmessage.txt
+	gpgsign = true
+[include]
+	path = .gitconfig.alias
+[pull]
+	ff = only
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
