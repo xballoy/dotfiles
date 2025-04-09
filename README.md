@@ -131,5 +131,19 @@ Install the following:
 
 ## Install
 
-1. Clone this project in your home folder `~`.
-2. You may need to temporary rename the existing `.config` folder and merge them manually.
+```sh
+# Clone your dotfiles into a bare repository
+git clone --bare git@github.com:xballoy/dotfiles.git $HOME/.dotfiles
+
+# Create the alias in your current shell
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# Checkout the content from the bare repository to your home directory
+dotfiles checkout
+
+# If there are conflicts with existing files, back them up first or force checkout
+# dotfiles checkout -f  # Be careful with this command!
+
+# Set the flag to hide untracked files
+dotfiles config --local status.showUntrackedFiles no
+```
