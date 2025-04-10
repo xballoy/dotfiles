@@ -13,7 +13,6 @@
 [help]
 	autocorrect = 1
 [commit]
-	template = .gitmessage.txt
 	gpgsign = true
 [include]
 	path = .gitconfig.alias
