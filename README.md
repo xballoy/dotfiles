@@ -146,4 +146,7 @@ dotfiles checkout
 
 # Set the flag to hide untracked files
 dotfiles config --local status.showUntrackedFiles no
+
+# Install zsh-nvm
+git clone https://github.com/lukechilds/zsh-nvm.git ~/.config/zsh/.zsh-nvm
 ```
