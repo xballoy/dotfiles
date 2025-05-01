@@ -19,6 +19,7 @@ export STORYBOOK_DISABLE_TELEMETRY=1
 
 # Path setup (essential paths that should be available everywhere)
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
 
 # GPG
 export GPG_TTY=$(tty)

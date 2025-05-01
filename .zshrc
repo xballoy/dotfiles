@@ -22,6 +22,7 @@ setopt complete_aliases
 
 # Alias
 alias edit=code
+alias bu='brew update && brew outdated && brew upgrade && brew cleanup --prune=all'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias zshrc='edit ${HOME}/.zshrc'
 

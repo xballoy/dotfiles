@@ -11,9 +11,10 @@
 	helper = osxkeychain
 	useHttpPath = true
 [help]
-	autocorrect = 1
+	autocorrect = prompt
 [commit]
 	gpgsign = true
+	verbose = true
 [include]
 	path = .gitconfig.alias
 [pull]
@@ -25,3 +26,33 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+
+# https://blog.gitbutler.com/how-git-core-devs-configure-git
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[push]
+	default = simple
+	autoSetupRemote = true
+	followTags = true
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[help]
+	autocorrect = prompt
+[rerere]
+	enabled = true
+	autoupdate = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
