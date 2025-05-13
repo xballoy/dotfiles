@@ -22,9 +22,43 @@ setopt complete_aliases
 
 # Alias
 alias edit=code
-alias bu='brew update && brew outdated && brew upgrade && brew cleanup --prune=all'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias zshrc='edit ${HOME}/.zshrc'
+
+# Usage: bu [cleanup]
+# Updates Homebrew and upgrades all outdated formulas with cleanup option.
+bu() {
+  local auto_cleanup=0
+  if [[ "$1" == "cleanup" ]]; then
+    auto_cleanup=1
+  fi
+
+  brew update
+  outdated_formulas=$(brew outdated)
+
+  if [ -n "$outdated_formulas" ]; then
+    echo "$outdated_formulas"
+    echo "\nUpgrading formulas..."
+    brew upgrade
+  else
+    echo "No outdated formulas found."
+  fi
+
+  if [ $auto_cleanup -eq 1 ]; then
+      brew cleanup --prune=all
+      echo "Cleanup complete."
+  fi
+}
+
+# Usage: gch
+# Displays all git branches in an interactive fuzzy finder, allowing quick filtering and selection for checkout.
+gch() {
+  local branches branch
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" | fzf -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/origin/##")
+}
+
 
 # Tool initializations (for interactive shells)
 # https://github.com/zsh-users/zsh-autosuggestions/
