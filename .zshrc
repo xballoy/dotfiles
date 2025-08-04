@@ -1,3 +1,11 @@
+# Init completion system once per day: https://scottspence.com/posts/speeding-up-my-zsh-shell#fixing-the-completion-system-3076--10
+autoload -Uz compinit
+if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
+    compinit
+else
+    compinit -C
+fi
+
 # Shell options
 # Prevents background jobs from having their priority lowered
 setopt NO_BG_NICE
@@ -20,10 +28,17 @@ setopt HIST_REDUCE_BLANKS
 # Expand aliases before attempting to complete them
 setopt complete_aliases
 
+# Path setup (essential paths that should be available everywhere)
+export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
+
 # Alias
 alias edit=code
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias zshrc='edit ${HOME}/.zshrc'
+alias claude-yolo='claude --dangerously-skip-permissions'
+alias wclaude-yolo='wclaude --dangerously-skip-permissions'
 
 # Usage: bu [cleanup]
 # Updates Homebrew and upgrades all outdated formulas with cleanup option.
@@ -59,7 +74,6 @@ gch() {
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/origin/##")
 }
 
-
 # Tool initializations (for interactive shells)
 # https://github.com/zsh-users/zsh-autosuggestions/
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -80,3 +94,4 @@ eval "$(zoxide init zsh)"
 
 # Starship prompt (should be last)
 eval "$(starship init zsh)"
+

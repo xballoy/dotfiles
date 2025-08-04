@@ -1,0 +1,7 @@
+{
+  "model": "sonnet",
+  "includeCoAuthoredBy": false,
+  "env": {
+    "DISABLE_TELEMETRY": "1"
+  }
+}
